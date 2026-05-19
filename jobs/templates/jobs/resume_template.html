@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 30px;
+}
+
+h1 {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 5px;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.skill-badge {
+    display: inline-block;
+    background: #e9ecef;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+    {{ profile.full_name }}
+</h1>
+
+<p>
+    <strong>Email:</strong>
+    {{ user.email }}
+</p>
+
+<p>
+    <strong>Phone:</strong>
+    {{ profile.phone }}
+</p>
+
+{% if profile.bio %}
+
+<div class="section">
+
+<div class="section-title">
+    Professional Summary
+</div>
+
+<p>
+    {{ profile.bio }}
+</p>
+
+</div>
+
+{% endif %}
+
+<div class="section">
+
+<div class="section-title">
+    Skills
+</div>
+
+{% for skill in skills %}
+
+{{ skill.name }}{% if not forloop.last %}, {% endif %}
+
+{% endfor %}
+
+<hr>
+
+<h3>
+Location
+</h3>
+
+<p>
+
+{{ profile.location }}
+
+</p>
+
+<hr>
+
+<hr>
+
+<h3>Certifications</h3>
+
+{% if certificates %}
+
+<ul>
+
+{% for certificate in certificates %}
+
+<li>
+
+<strong>
+{{ certificate.certificate_name }}
+</strong>
+
+-
+
+{{ certificate.issued_by }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No certifications added.</p>
+
+{% endif %}
+
+
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+    Career Objective
+</div>
+
+<p>
+Seeking opportunities to apply technical and problem-solving skills in a dynamic organization while contributing to organizational growth and continuous learning.
+</p>
+
+</div>
+
+</body>
+
+</html>

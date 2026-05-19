@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2 class="text-primary mb-4">
+
+Edit Profile
+
+</h2>
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Skills
+
+</label>
+
+{{ form.skills }}
+
+</div>
+
+<label class="form-label fw-bold">
+
+Upload Resume (PDF)
+
+</label>
+
+{{ form.resume }}
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+GitHub Profile
+
+</label>
+
+{{ form.github }}
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Portfolio Website
+
+</label>
+
+{{ form.portfolio_website }}
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Professional Summary
+
+</label>
+
+{{ form.bio }}
+
+</div>
+
+<hr class="my-4">
+
+<h4 class="text-primary mb-3">
+
+Skill Certificates
+
+</h4>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Certificate Name
+
+</label>
+
+{{ certificate_form.certificate_name }}
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Issued By
+
+</label>
+
+{{ certificate_form.issued_by }}
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+
+Upload Certificate PDF
+
+</label>
+
+{{ certificate_form.certificate_file }}
+
+</div>
+
+{% if certificates %}
+
+<hr>
+
+<h5 class="mb-3">
+
+Uploaded Certificates
+
+</h5>
+
+{% for certificate in certificates %}
+
+<div class="card p-3 mb-2 shadow-sm">
+
+<strong>
+
+{{ certificate.certificate_name }}
+
+</strong>
+
+<p class="mb-1 text-muted">
+
+{{ certificate.issued_by }}
+
+</p>
+
+<a href="{{ certificate.certificate_file.url }}"
+   target="_blank"
+   class="btn btn-outline-primary btn-sm">
+
+View Certificate
+
+</a>
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<button type="submit"
+        class="btn btn-success w-100">
+
+Save Changes
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

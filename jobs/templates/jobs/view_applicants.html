@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+<div class="container mt-5">
+
+<h2 class="text-primary mb-4">
+Applicants for {{ job.title }}
+</h2>
+
+{% for applicant in applicant_data %}
+
+<div class="card p-3 mb-3 
+{% if forloop.first %}border-primary shadow-lg{% elif applicant.candidate.profile.is_verified %}border-success{% endif %}">
+
+{% if forloop.first %}
+<span class="badge bg-primary mb-2">
+Top Candidate
+</span>
+{% endif %}
+
+<h5>
+
+{{ applicant.candidate.profile.full_name }}
+
+{% if applicant.candidate.profile.is_verified %}
+
+<span class="text-primary fw-bold ms-1">
+✔ Verified Candidate
+</span>
+
+{% endif %}
+
+</h5>
+
+<!-- Candidate Contact Info -->
+
+<p class="mb-1">
+📧 {{ applicant.candidate.email }}
+</p>
+
+<p class="mb-2">
+📞 {{ applicant.candidate.profile.phone }}
+</p>
+
+<!-- Professional Summary -->
+
+{% if applicant.candidate.profile.bio %}
+
+<div class="mb-3">
+
+<p class="fw-bold mb-1">
+Professional Summary
+</p>
+
+<p class="text-muted">
+{{ applicant.candidate.profile.bio }}
+</p>
+
+</div>
+
+{% endif %}
+
+<!-- GitHub -->
+
+{% if applicant.candidate.profile.github %}
+
+<p>
+
+<strong>GitHub:</strong>
+
+<a href="{{ applicant.candidate.profile.github }}"
+   target="_blank">
+
+   {{ applicant.candidate.profile.github }}
+
+</a>
+
+</p>
+
+{% endif %}
+
+<!-- Portfolio -->
+
+{% if applicant.candidate.profile.portfolio_website %}
+
+<p>
+
+<strong>Portfolio:</strong>
+
+<a href="{{ applicant.candidate.profile.portfolio_website }}"
+   target="_blank">
+
+   View Portfolio
+
+</a>
+
+</p>
+
+{% endif %}
+
+<!-- Skills -->
+
+<p class="fw-bold mb-2">
+Skills
+</p>
+
+<div class="mb-3">
+
+{% for skill in applicant.candidate.profile.skills.all %}
+
+<span class="badge bg-secondary me-1 mb-1">
+
+{{ skill.name }}
+
+</span>
+
+{% endfor %}
+
+</div>
+
+<!-- Certificates -->
+
+{% if applicant.certificates %}
+
+<p class="fw-bold mb-2">
+Skill Certificates
+</p>
+
+<ul>
+
+{% for certificate in applicant.certificates %}
+
+<li>
+
+<a href="{{ certificate.certificate_file.url }}"
+   target="_blank">
+
+   {{ certificate.certificate_name }}
+
+</a>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+<!-- Match Score -->
+
+<p class="mb-1 fw-bold">
+Match Score
+</p>
+
+<div class="progress mb-3">
+
+{% if applicant.match >= 80 %}
+
+<div class="progress-bar bg-success"
+     role="progressbar"
+     style="width: {{ applicant.match }}%;">
+
+    {{ applicant.match }}%
+
+</div>
+
+{% elif applicant.match >= 50 %}
+
+<div class="progress-bar bg-primary"
+     role="progressbar"
+     style="width: {{ applicant.match }}%;">
+
+    {{ applicant.match }}%
+
+</div>
+
+{% elif applicant.match >= 30 %}
+
+<div class="progress-bar bg-warning"
+     role="progressbar"
+     style="width: {{ applicant.match }}%;">
+
+    {{ applicant.match }}%
+
+</div>
+
+{% else %}
+
+<div class="progress-bar bg-danger"
+     role="progressbar"
+     style="width: {{ applicant.match }}%;">
+
+    {{ applicant.match }}%
+
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- Application Status -->
+
+<p class="fw-bold mb-1">
+Application Status
+</p>
+
+<form method="POST" class="mb-3">
+
+{% csrf_token %}
+
+<input type="hidden"
+       name="application_id"
+       value="{{ applicant.application.id }}">
+
+<div class="d-flex gap-2">
+
+<select name="status" class="form-select">
+
+<option value="Applied"
+{% if applicant.application.status == "Applied" %}
+selected
+{% endif %}>
+Applied
+</option>
+
+<option value="Under Review"
+{% if applicant.application.status == "Under Review" %}
+selected
+{% endif %}>
+Under Review
+</option>
+
+<option value="Shortlisted"
+{% if applicant.application.status == "Shortlisted" %}
+selected
+{% endif %}>
+Shortlisted
+</option>
+
+<option value="Interview Scheduled"
+{% if applicant.application.status == "Interview Scheduled" %}
+selected
+{% endif %}>
+Interview Scheduled
+</option>
+
+<option value="Selected"
+{% if applicant.application.status == "Selected" %}
+selected
+{% endif %}>
+Selected
+</option>
+
+<option value="Rejected"
+{% if applicant.application.status == "Rejected" %}
+selected
+{% endif %}>
+Rejected
+</option>
+
+</select>
+
+<button type="submit"
+        class="btn btn-primary btn-sm">
+
+Update
+
+</button>
+
+</div>
+
+</form>
+
+<!-- Resume -->
+
+{% if applicant.candidate.profile.resume %}
+
+<a href="{{ applicant.candidate.profile.resume.url }}"
+class="btn btn-outline-primary btn-sm">
+
+Download Resume
+
+</a>
+
+{% endif %}
+
+<!-- Interview -->
+
+<a href="{% url 'schedule_interview' applicant.application.id %}"
+   class="btn btn-success btn-sm mt-2">
+
+Schedule Interview
+
+</a>
+
+</div>
+
+{% empty %}
+
+<p>No applicants yet.</p>
+
+{% endfor %}
+
+<a href="{% url 'recruiter_dashboard' %}" class="btn btn-secondary mt-3">
+Back to Dashboard
+</a>
+
+</div>
+
+
+{% endblock %}

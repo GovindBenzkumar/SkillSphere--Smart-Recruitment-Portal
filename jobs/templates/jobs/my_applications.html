@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4 text-primary">
+    My Applications
+</h2>
+
+{% if applications %}
+
+    {% for application in applications %}
+
+        <div class="card mb-3 p-3 shadow-sm">
+
+            <h5>
+                {{ application.job.title }}
+            </h5>
+
+            <p class="text-muted">
+                {{ application.job.company }}
+                |
+                {{ application.job.location }}
+            </p>
+
+            <small>
+                Applied on:
+                {{ application.applied_on|date:"d M Y, h:i A" }}
+            </small>
+
+            <!-- STATUS -->
+
+            <div class="mt-2">
+
+                {% if application.status == "Applied" %}
+
+                    <span class="badge bg-primary">
+                        Applied
+                    </span>
+
+                {% elif application.status == "Under Review" %}
+
+                    <span class="badge bg-warning text-dark">
+                        Under Review
+                    </span>
+
+                {% elif application.status == "Shortlisted" %}
+
+                    <span class="badge bg-info text-dark">
+                        Shortlisted
+                    </span>
+
+                {% elif application.status == "Interview Scheduled" %}
+
+                    <span class="badge bg-secondary">
+                        Interview Scheduled
+                    </span>
+
+                {% elif application.status == "Selected" %}
+
+                    <span class="badge bg-success">
+                        Selected
+                    </span>
+
+                {% elif application.status == "Rejected" %}
+
+                    <span class="badge bg-danger">
+                        Rejected
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            <!-- INTERVIEW DETAILS -->
+
+            {% if application.status == "Interview Scheduled" %}
+
+            <div class="alert alert-info mt-3">
+
+                <h6 class="fw-bold">
+                    Interview Scheduled
+                </h6>
+
+                <p class="mb-1">
+                    📅 Date:
+                    {{ application.interview.interview_date }}
+                </p>
+
+                <p class="mb-1">
+                    ⏰ Time:
+                    {{ application.interview.interview_time }}
+                </p>
+
+                <p class="mb-1">
+                    💻 Mode:
+                    {{ application.interview.mode }}
+                </p>
+
+                {% if application.interview.meeting_link %}
+
+                <p class="mb-1">
+                    🔗
+                    <a href="{{ application.interview.meeting_link }}"
+                       target="_blank">
+
+                       Join Meeting
+
+                    </a>
+                </p>
+
+                {% endif %}
+
+                {% if application.interview.instructions %}
+
+                <p class="mb-0">
+                    📝 {{ application.interview.instructions }}
+                </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>You have not applied for any jobs yet.</p>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

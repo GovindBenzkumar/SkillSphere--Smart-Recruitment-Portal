@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-5">
+
+<div class="card shadow p-4 border-0">
+
+<h2 class="text-center text-primary mb-3">
+
+Phone Verification
+
+</h2>
+
+<p class="text-center text-muted">
+
+Enter the 6-digit OTP sent to your phone
+
+</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<input type="text"
+       name="otp"
+       class="form-control mb-3"
+       placeholder="Enter OTP">
+
+<button type="submit"
+        class="btn btn-primary w-100">
+
+Verify OTP
+
+</button>
+
+</form>
+
+<div class="text-center mt-3">
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

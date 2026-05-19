@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<!-- GREETING -->
+
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h2 class="text-primary fw-bold">
+        {{ profile }} , 
+        Hello,
+
+        {% if profile.full_name %}
+
+        {{ profile.full_name }}
+
+        {% else %}
+
+        {{ request.user.username }}
+
+        {% endif %}
+
+        👋
+    </h2>
+
+    <p class="text-muted mb-0">
+        Welcome to your SkillSphere profile dashboard
+    </p>
+
+</div>
+
+<!-- PROFILE OVERVIEW -->
+
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <h4 class="text-dark fw-bold">
+            Profile Overview
+        </h4>
+
+        <a href="{% url 'edit_profile' %}"
+           class="btn btn-primary btn-sm">
+
+           Edit Profile
+
+        </a>
+
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Full Name:</strong><br>
+            {{ profile.full_name }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Email:</strong><br>
+            {{ request.user.email }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Phone:</strong><br>
+            {{ profile.phone }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Location:</strong><br>
+            {{ profile.location }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>College:</strong><br>
+            {{ profile.college_name }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Degree:</strong><br>
+            {{ profile.degree }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Graduation Year:</strong><br>
+            {{ profile.graduation_year }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <strong>Experience Level:</strong><br>
+            {{ profile.experience_level }}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PROFESSIONAL SUMMARY -->
+
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h4 class="fw-bold text-dark">
+        Professional Summary
+    </h4>
+
+    <hr>
+
+    <p>
+
+        {% if profile.bio %}
+
+            {{ profile.bio }}
+
+        {% else %}
+
+            No professional summary added yet.
+
+        {% endif %}
+
+    </p>
+
+</div>
+
+<!-- SKILLS -->
+
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h4 class="fw-bold text-dark">
+        Skills
+    </h4>
+
+    <hr>
+
+    {% for skill in profile.skills.all %}
+
+        <span class="badge bg-secondary p-2 me-2 mb-2">
+            {{ skill.name }}
+        </span>
+
+    {% empty %}
+
+        <p>No skills added yet.</p>
+
+    {% endfor %}
+
+</div>
+
+<!-- QUICK STATS -->
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm border-0 p-4 text-center">
+
+            <h3 class="text-primary">
+                {{ applications_count }}
+            </h3>
+
+            <p class="mb-0">
+                Applications
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm border-0 p-4 text-center">
+
+            <h3 class="text-warning">
+                {{ shortlisted_count }}
+            </h3>
+
+            <p class="mb-0">
+                Shortlisted
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm border-0 p-4 text-center">
+
+            <h3 class="text-success">
+                {{ interview_count }}
+            </h3>
+
+            <p class="mb-0">
+                Interviews
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ACTION BUTTONS -->
+
+<div class="card shadow-sm border-0 p-4 mb-5">
+
+    <h4 class="fw-bold text-dark">
+        Career Tools
+    </h4>
+
+    <hr>
+
+    <div class="d-flex gap-3 flex-wrap">
+
+        <a href="{% url 'generate_resume' %}"
+           class="btn btn-success">
+
+           Download ATS Resume
+
+        </a>
+
+        <a href="{% url 'my_applications' %}"
+           class="btn btn-primary">
+
+           View Applications
+
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

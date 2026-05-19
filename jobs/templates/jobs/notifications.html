@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h3 class="mb-4">
+
+Notifications
+
+</h3>
+
+{% for notification in notifications %}
+
+<div class="card shadow-sm p-3 mb-3">
+
+<p class="mb-1">
+
+{{ notification.message }}
+
+</p>
+
+<small class="text-muted">
+
+{{ notification.created_at }}
+
+</small>
+
+</div>
+
+{% empty %}
+
+<div class="alert alert-info">
+
+No notifications available.
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

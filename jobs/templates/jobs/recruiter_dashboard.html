@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h1 class="text-primary mb-2">
+Recruiter Dashboard
+</h1>
+
+<h5 class="text-dark mb-4">
+
+Hello Recruiter,
+
+{% if profile.full_name %}
+
+{{ profile.full_name }}
+
+{% else %}
+
+{{ request.user.username }}
+
+{% endif %}
+
+👋
+
+</h5>
+
+
+
+
+<div class="d-flex gap-2 mb-4">
+
+<a href="{% url 'post_job' %}"
+   class="btn btn-success">
+
+   Post New Job
+
+</a>
+
+<a href="{% url 'recruiter_profile' %}"
+   class="btn btn-dark">
+
+My Profile
+
+</a>
+
+<a href="{% url 'edit_recruiter_profile' %}"
+   class="btn btn-outline-primary">
+
+   Edit Profile
+
+</a>
+
+</div>
+
+<h4>Your Posted Jobs</h4>
+
+{% for item in job_data %}
+
+<div class="card p-3 mb-3">
+
+<h5>{{ item.job.title }}</h5>
+
+<p class="text-muted">
+{{ item.job.company }} | {{ item.job.location }}
+</p>
+
+<p>
+Applicants: <strong>{{ item.applicant_count }}</strong>
+</p>
+
+<!-- View Applicants Button -->
+<a href="{% url 'view_applicants' item.job.id %}" class="btn btn-primary btn-sm">
+View Applicants
+</a>
+
+</div>
+
+{% empty %}
+
+<p>No jobs posted yet.</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

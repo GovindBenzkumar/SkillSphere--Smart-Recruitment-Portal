@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+body{
+background:#f4f6f9;
+font-family:Arial,sans-serif;
+}
+
+.signup-card{
+border-radius:12px;
+border:none;
+}
+
+.form-title{
+font-weight:600;
+}
+
+.section-divider{
+border-top:1px solid #e0e0e0;
+margin:20px 0;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:10px;
+border:1px solid #ced4da;
+border-radius:6px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+outline:none;
+border-color:#0d6efd;
+box-shadow:0 0 5px rgba(13,110,253,0.3);
+}
+
+</style>
+
+<div class="container">
+
+<div class="row justify-content-center mt-5">
+
+<div class="col-md-8">
+
+<div class="card signup-card shadow-sm p-4">
+
+<h3 class="text-center form-title mb-4">
+
+Create Your Account
+
+</h3>
+
+{% if form.errors %}
+
+<div class="alert alert-danger">
+
+{{ form.errors }}
+
+</div>
+
+{% endif %}
+
+<p style="color:blue; text-align:center;">
+
+Candidates can skip recruiter fields.
+Recruiters can skip candidate academic fields.
+
+</p>
+
+<form method="POST" novalidate>
+
+{% csrf_token %}
+
+<!-- ACCOUNT DETAILS -->
+
+<h6 class="mb-3 text-muted">
+
+<b><u>Account Details</b></u>
+
+</h6>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+Role
+</label>
+
+{{ form.role }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Username
+
+</label>
+
+{{ form.username }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Email
+
+</label>
+
+{{ form.email }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Password
+
+</label>
+
+{{ form.password1 }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Confirm Password
+
+</label>
+
+{{ form.password2 }}
+
+</div>
+
+</div>
+
+<!-- PERSONAL DETAILS -->
+
+<div class="section-divider"></div>
+
+<h6 class="mb-3 text-muted">
+
+<b><u>Personal Details</b></u>
+
+</h6>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Full Name
+
+</label>
+
+{{ form.full_name }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Phone Number
+
+</label>
+
+{{ form.phone }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Age
+
+</label>
+
+{{ form.age }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Location
+
+</label>
+
+{{ form.location }}
+
+</div>
+
+</div>
+
+<!-- ACADEMIC DETAILS -->
+
+<div class="section-divider"></div>
+
+<h6 class="mb-3 text-muted">
+
+<b><u>Academic Details</u></b>
+
+</h6>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+College Name
+
+</label>
+
+{{ form.college_name }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Degree
+
+</label>
+
+{{ form.degree }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Graduation Year
+
+</label>
+
+{{ form.graduation_year }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Experience Level
+
+</label>
+
+{{ form.experience_level }}
+
+</div>
+
+</div>
+
+<!-- PROFESSIONAL DETAILS -->
+
+<div class="section-divider"></div>
+
+<h6 class="mb-3 text-muted">
+
+<b><u>Professional Details</u></b>
+
+</h6>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+GitHub URL
+
+</label>
+
+{{ form.github }}
+
+</div>
+
+<div class="col-12 mb-3">
+
+<label class="form-label">
+
+Professional Summary
+
+</label>
+
+{{ form.bio }}
+
+</div>
+
+</div>
+
+<!-- RECRUITER DETAILS -->
+
+<div class="section-divider"></div>
+
+<h6 class="mb-3 text-muted">
+
+<b><u>Recruiter Details</u></b>
+
+</h6>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Company Name
+
+</label>
+
+{{ form.company_name }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Company Location
+
+</label>
+
+{{ form.company_location }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Company Website
+
+</label>
+
+{{ form.company_website }}
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+
+Recruiter Designation
+
+</label>
+
+{{ form.designation }}
+
+</div>
+
+<div class="col-12 mb-3">
+
+<label class="form-label">
+
+Company Description
+
+</label>
+
+{{ form.company_description }}
+
+</div>
+
+</div>
+
+<button type="submit"
+        class="btn btn-primary w-100 mt-3">
+
+Create Account
+
+</button>
+
+</form>
+
+<div class="section-divider"></div>
+
+<p class="text-center mb-2">
+
+Already have an account?
+
+</p>
+
+<div class="text-center">
+
+<a href="{% url 'login' %}"
+   class="btn btn-outline-secondary">
+
+Login here
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

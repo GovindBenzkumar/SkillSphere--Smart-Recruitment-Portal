@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>SkillSphere</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<style>
+
+/* NAVBAR */
+
+.custom-navbar{
+background:#111827;
+padding:18px 40px;
+}
+
+.brand-logo{
+font-size:32px;
+margin-right:10px;
+}
+
+.brand-text{
+font-size:20px;
+font-weight:700;
+color:white;
+text-decoration:none;
+}
+
+.nav-btn{
+border-radius:30px;
+padding:10px 22px;
+font-weight:600;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+background:linear-gradient(135deg,#4f46e5,#9333ea,#ec4899);
+background-size:400% 400%;
+animation:gradientMove 10s ease infinite;
+color:white;
+padding:150px 20px;
+text-align:center;
+overflow:hidden;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.hero h1{
+font-size:60px;
+font-weight:700;
+}
+
+.hero p{
+font-size:20px;
+opacity:0.9;
+max-width:800px;
+margin:auto;
+}
+
+/* floating glow blobs */
+
+.blob{
+position:absolute;
+border-radius:50%;
+opacity:0.25;
+filter:blur(50px);
+}
+
+.blob1{
+width:250px;
+height:250px;
+background:white;
+top:-100px;
+left:-100px;
+}
+
+.blob2{
+width:300px;
+height:300px;
+background:#ff00ff;
+bottom:-120px;
+right:-120px;
+}
+
+/* FEATURE BADGES */
+
+.feature-badges span{
+border-radius:30px;
+padding:12px 20px;
+font-weight:500;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* STATS */
+
+.stats{
+background:#f9fafc;
+padding:80px 0;
+text-align:center;
+}
+
+.stat-number{
+font-size:40px;
+font-weight:700;
+color:#6366f1;
+}
+
+/* FEATURES */
+
+.features{
+padding:100px 0;
+background:linear-gradient(180deg,#eef2ff,#ffffff);
+}
+
+.feature-card{
+border:none;
+border-radius:20px;
+padding:40px;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+transition:all 0.4s ease;
+}
+
+.feature-card:hover{
+transform:translateY(-15px) scale(1.03);
+box-shadow:0 25px 50px rgba(0,0,0,0.15);
+}
+
+.feature-icon{
+font-size:48px;
+margin-bottom:15px;
+}
+
+/* LOGO SCROLLER */
+
+.logo-section{
+background:#fff;
+padding:60px 0;
+overflow:hidden;
+}
+
+.logo-track{
+display:flex;
+gap:80px;
+animation:scroll 20s linear infinite;
+}
+
+.logo-track img{
+height:40px;
+opacity:0.7;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+/* HOW IT WORKS */
+
+.steps{
+padding:100px 0;
+}
+
+.step-box{
+padding:30px;
+background:white;
+border-radius:15px;
+transition:0.3s;
+}
+
+.step-box:hover{
+transform:scale(1.07);
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+.step-number{
+background:#6366f1;
+color:white;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+margin-bottom:10px;
+font-weight:bold;
+}
+
+/* BUTTONS */
+
+.hero-btn{
+padding:12px 28px;
+border-radius:30px;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PUBLIC NAVBAR -->
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+<div class="container-fluid">
+
+<div class="d-flex align-items-center">
+
+<span class="brand-logo">
+🔍
+</span>
+
+<a href="/" class="brand-text">
+
+SkillSphere - Smart Recruitment Portal
+
+</a>
+
+</div>
+
+<div>
+
+<a href="{% url 'login' %}"
+   class="btn btn-outline-light nav-btn me-2">
+
+Login
+
+</a>
+
+<a href="{% url 'signup' %}"
+   class="btn btn-warning nav-btn">
+
+Sign Up
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<h1>SkillSphere - Smart Recruitment Portal</h1>
+
+<br>
+
+<p>
+Find jobs that match your skills automatically using our intelligent skill-based recommendation system.
+</p>
+
+<div class="d-flex justify-content-center flex-wrap gap-3 mt-4 feature-badges">
+
+<span class="badge bg-light text-dark fs-6">
+✔ Smart Skill Matching
+</span>
+
+<span class="badge bg-light text-dark fs-6">
+✔ Verified Recruiters
+</span>
+
+<span class="badge bg-light text-dark fs-6">
+✔ Personalized Job Recommendations
+</span>
+
+</div>
+
+<br><br><br>
+
+<a href="{% url 'browse_jobs' %}"
+   class="btn btn-light btn-lg hero-btn">
+
+Browse Jobs
+
+</a>
+
+<a href="{% url 'signup' %}"
+   class="btn btn-warning btn-lg hero-btn">
+
+Get Started
+
+</a>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="stat-number">500+</div>
+<p>Jobs Posted</p>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="stat-number">200+</div>
+<p>Recruiters</p>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="stat-number">1000+</div>
+<p>Candidates</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FEATURES -->
+
+<div class="features">
+
+<div class="container">
+
+<h2 class="text-center mb-5 fw-bold">Why Choose SkillSphere?</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="feature-card text-center">
+
+<div class="feature-icon">🧠</div>
+
+<h4>Skill Matching</h4>
+
+<p>
+Our intelligent system compares candidate skills with job requirements and calculates match percentage automatically.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-card text-center">
+
+<div class="feature-icon">✔️</div>
+
+<h4>Verified Recruiters</h4>
+
+<p>
+Recruiters verified by admin receive a verification badge ensuring trusted job postings.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-card text-center">
+
+<div class="feature-icon">🚀</div>
+
+<h4>Easy Applications</h4>
+
+<p>
+Candidates can apply for jobs and track application status easily from dashboard.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COMPANY LOGOS -->
+
+<div class="logo-section">
+
+<div class="container">
+
+<h3 class="text-center mb-5 text-muted">
+Trusted by Top Companies
+</h3>
+
+<div class="logo-track">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+
+<div class="steps">
+
+<div class="container">
+
+<h2 class="text-center mb-5 fw-bold">How It Works</h2>
+
+<div class="row text-center">
+
+<div class="col-md-3">
+
+<div class="step-box">
+
+<div class="step-number">1</div>
+
+<h5>Create Profile</h5>
+
+<p>Add your personal details and skills</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="step-box">
+
+<div class="step-number">2</div>
+
+<h5>Add Skills</h5>
+
+<p>List your technical and professional skills</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="step-box">
+
+<div class="step-number">3</div>
+
+<h5>Get Smart Matches</h5>
+
+<p>System compares your skills with job requirements automatically</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="step-box">
+
+<div class="step-number">4</div>
+
+<h5>Apply</h5>
+
+<p>Apply and track your job applications easily</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
